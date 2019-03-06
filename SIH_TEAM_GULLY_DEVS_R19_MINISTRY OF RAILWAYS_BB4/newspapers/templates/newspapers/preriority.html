@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+{% block content %}
+<div id="tog" class="text-white" style="position: absolute;z-index: 10;">
+    <span class="btn btn-sm" data-toggle="offcanvas"><i class="fas fa-bars fa-2x"></i></span>
+</div>
+
+
+                <div class="container row mx-auto">
+                    <div class="col-12 my-2 border bg-white text-dark rounded">
+                        <h4 class="text-center d-block my-3">Popular News From "NewsPaper Name"</h4>
+                    </div>
+
+                    <div class="col-12 text-justify bg-white text-dark border rounded mt-1">
+                      {% for single_news in news %}
+                        <h4 class="ml-1 d-block my-3">News </h4>
+                        <P class="container">{{single_news}}</P>
+                      {% endfor %}
+                    </div>
+                </div>
+{% endblock %}

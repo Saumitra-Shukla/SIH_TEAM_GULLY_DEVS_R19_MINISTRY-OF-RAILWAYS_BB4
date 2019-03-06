@@ -1,0 +1,123 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div id="tog" class="text-white" style="position: absolute;z-index: 10;">
+    <span class="btn btn-sm" data-toggle="offcanvas"><i class="fas fa-bars fa-2x"></i></span>
+</div>
+<div class="container mx-auto mb-4">
+    <h5 class="text-center">Search For Rates</h5>
+    <form class="form-inline" id='filter' action="{% url 'rates:news_rates' %}" name='filter'  method='post'>
+        <div class="col-lg-3 mt-3">
+
+                {% csrf_token %}
+            <select class="form-control-sm bg-dark text-white col-12 border-success" id='name' name='name'>
+
+                <option>Select</option>
+                {% for opt in newspapers %}
+                <option>{{opt.name}}  {{opt.pk}}</option>
+                <!-- <option>2</option> -->
+                {% endfor %}
+            </select>
+        </div>
+        <div class="text-center" id="pp">
+            <input class="btn btn-sm btn-success  col-12 mt-3" type="submit" name="" value="Search News">
+        </div>
+        <script type="text/javascript">
+            if($(window).width()<596)
+                $('#pp').addClass('mx-auto');
+            console.log(5);
+        </script>
+    </form>
+</div>
+
+<!-- Table Section -->
+<div class="">
+    <div class="newspapercategory-table">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                   <h2>Check out<strong> {{news_rates.Newspaper_name.name}}</strong> Display  <strong>Ad Rates</strong></h2>
+                    {% for opt in news_rates %}
+                    {% autoescape off %}
+                   {{opt.rate_text}}
+                                       <!--Paginator-->
+<!--Paginator-->
+<div class="container">
+    <div class="text-center">
+  {% if news_rates.has_other_pages %}
+      <ul class="pagination">
+        {% if news_rates.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ news_rates.previous_page_number }} tabindex="-1"">Previous</a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        {% endif %}
+        {% for i in news_rates.paginator.page_range %}
+          {% if news_rates.number == i %}
+            <li class="page-item active "><span class="page-link">{{ i }} <span class="sr-only page-link">(current)</span></span></li>
+          {% else %}
+            <li class=" page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if news_rates.has_next %}
+          <li class="page-item" ><a class="page-link" href="?page={{ news_rates.next_page_number }}" tabindex="-1">Next</a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">Next</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+                   {% endautoescape %}
+                   {% endfor %}
+
+                    <!-- <h2>Check out<strong> The Hindu</strong> Display  <strong>Ad Rates</strong></h2>
+                    <p class="green-bg-para text-center">Tariff Rates in Rupees per Sq.cm. (w.e.f 1-05-2018)</p>
+                    <div class="resp-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Edition</td>
+                                    <td>Base</td>
+                                    <td>Mon to Thus</td>
+                                    <td>Fri &amp; Sat</td>
+                                    <td>Sunday</td>
+                                    <td>Front Page</td>
+                                    <td>Page 3</td>
+                                    <td>Back Page</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Eastern Edition</td>
+                                    <td></td>
+                                    <td>220</td>
+                                    <td>240</td>
+                                    <td>230</td>
+                                    <td>60</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    $('table').addClass('table table-striped bg-white text-dark shadow border rounded bg-success ');
+    $('h2').addClass('text-center');
+    $('table thead tr td').addClass('text-white mt-1 bg-secondary');
+</script>
+
+<!-- <script type="text/javascript">
+    for(var i=0;i<20;i++)
+    $('tbody').append('<tr><td>Eastern Edition</td><td></td><td>220</td><td>240</td><td>230</td><td>60</td><td></td><td></td></tr>');
+</script> -->
+
+{% endblock %}

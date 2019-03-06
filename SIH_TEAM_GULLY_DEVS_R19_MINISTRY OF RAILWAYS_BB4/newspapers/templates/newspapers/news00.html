@@ -1,0 +1,95 @@
+ {% extends "main.html" %}
+
+                {% block content %}
+
+<div id="tog" class="text-white" style="position: absolute;z-index: 10;">
+    <span class="btn btn-sm" data-toggle="offcanvas"><i class="fas fa-bars fa-2x"></i></span>
+</div>
+<div class="container mx-auto">
+    <h5 class="text-center">Fetched News</h5>
+    <form class="form-inline" method="post" action="action-url">
+        <div class="col-lg-3 mt-3">
+            <select class="form-control-sm bg-dark text-white col-12 border-success" id="sel1">
+                <option>Select</option>
+                <option>Favorates</option>
+                <option>Latest</option>
+            </select>
+        </div>
+        <div class="text-center" id="pp">
+            <input class="btn btn-sm btn-success  col-12 mt-3" type="submit" name="" value="Search News">
+        </div>
+        <script type="text/javascript">
+            if($(window).width()<596)
+                $('#pp').addClass('mx-auto');
+            console.log(5);
+        </script>
+    </form>
+</div>
+
+                <div class="row rounded mx-auto container">
+                    <div class="col-12 mt-5 jumbotron img-jumbo" >
+                        <br><br><br><br><br>
+                    </div>
+                </div>
+                <div class="container row mx-auto">
+                    <div class="col-12 text-justify bg-white text-dark border rounded">
+                        <h4 class="ml-1 d-block my-3 text-center">{{news_detail.heading}}</h4>
+                        <P class="container">{{news_detail.article}}</P>
+                        <div class="bg-white my-3 mx-2">
+                            <span href="" id="like" onclick="likeit();"><i class="fas fa-star fa-2x text-info mx-2" ></i></span>
+                            <!-- <a href="#"<i class="fas fa-star fa-2x text-info mx-2"></i></a> -->
+                            <button class="btn btn-danger m-auto d-block" data-target="#share-modal" data-toggle="modal"><i class="fas fa-share-alt fa-2x text-info mx-2"></i></button>
+                        </div>
+                        <script type="text/javascript">
+                            like = 0;
+                            function likeit(){
+                                a = $('#like');
+                                if(like==0) {
+                                    a.html('<i class="fas fa-star fa-2x text-info mx-2">');
+                                    like = 1;
+                                }
+                                else{
+                                    a.html('<i class="far fa-star fa-2x text-info mx-2">');
+                                    like = 0;
+                                }
+                            }
+                        </script>
+                    </div>
+                </div>
+
+            
+            <div class="modal fade" id="share-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="text-primary"> Share on social media </h5>
+                            <button class="close" data-dismiss="modal"> &times; </button>
+                        </div>
+                        <div class="modal-body mx-auto my-3">
+                            <ul class="list-inline">
+                                <li class="list-inline-item mx-3">
+                                    <div class="div-circle bg-secondary text-center"><a class="text-white" href="https://www.facebook.com/sharer.php?u=url-here" target="_blank"><i class="fab fa-facebook-f fa-2x"></i></a></div>
+                                </li>
+                                <li class="list-inline-item mx-3">
+                                    <div class="div-circle bg-info text-center"><a class="text-white" href="https://twitter.com/intent/tweet?text=url-here" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></div>
+                                </li>
+                                <li class="list-inline-item mx-3">
+                                    <div class="div-circle bg-success text-center">
+                                        <a class="text-white" href="https://api.whatsapp.com/send?text=url-here" target="_blank">
+                                            <i class="fab fa-whatsapp fa-2x"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="list-inline-item mx-3">
+                                    <div class="div-circle bg-danger text-center"><a class="text-white" href="https://plus.google.com/share?url=url-here" target="_blank"><i class="fab fa-google-plus-g fa-2x"></i></a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $('.div-circle').css({"width":"45px","height":"45px","border-radius":"50%","line-height":"55px"});
+            </script>
+
+            {% endblock %}

@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="{% static 'lib/jquery-3.3.1.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'lib/bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <div id="hero" class="row">
+        <div id="hero-overlay"></div>
+        <div class="col-lg-3 mx-auto my-5" id="login-box">
+        	<div class="m-auto text-center bg-info p-3 text-white rounded">Login To Your Account</div>
+        	<form method="POST" action="{% url 'accounts:profile' %}" class="form-group mx-auto" style="background: rgba(0, 0, 0, 0.9);">
+        		{% csrf_token %}
+        		<br>
+        		<center><img src="{% static 'img/indian_railway.png' %}" class="rounded-circle img-fluid" width="150"></center>
+        		<br>
+        		<div class="col-11 mx-auto form-group input-group">
+	              <div class="input-group-prepend">
+	                <span class="input-group-text"><i class="fa fa-fingerprint"></i></span>
+	              </div>
+	              <input type="text" name="username" id='username' class="form-control" placeholder="Enter R UID" required>
+	            </div>
+        		<div class="col-11 mx-auto form-group input-group">
+	              <div class="input-group-prepend">
+	                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+	              </div>
+	             <input type="email" name="email" id='email' class="form-control" placeholder="Enter Email" required>
+	            </div>
+	            <div class="col-11 mx-auto form-group input-group">
+	              <div class="input-group-prepend">
+	                <span class="input-group-text"><i class="fa fa-key"></i></span>
+	              </div>
+	               <input type="Password" name="password" id='password' class="form-control" placeholder="Enter Password" required>
+	            </div>
+	            <div class="col-11 mx-auto form-group input-group text-white"><input type="checkbox" name="">&nbsp; Remember Me</div>
+	            <center><button type="submit" class="btn btn-primary text-center my-2">Login <i class="far fa-paper-plane"></i></button></center>
+	            <div class="text-center text-white"><a href="#">Forgot Password</a><br>Not Registered ? <a href="{% url 'accounts:signup' %}" onclick="change();">SignUp Here</a> </div><br>
+        	</form>
+        </div>
+        <!--
+        <div class="col-lg-5 mx-auto my-5" id="signup-box">
+        	<div class="m-auto text-center bg-info p-3 text-white rounded">Register New Account</div>
+        	<form method="POST" action="/destination-url/" class="form-group mx-auto" style="background: rgba(0, 0, 0, 0.9);">
+        		<center><img src="img/avatar.png" class="img-fluid py-3"></center>
+        		<div class="row pt-3 mx-auto pt-3">
+	        		<div class="col-6 mx-auto form-group input-group">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
+		              </div>
+		              <input type="text" name="signup_name" class="form-control" placeholder="Enter Full Name" required>
+		            </div>
+	        		<div class="col-6 mx-auto form-group input-group">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+		              </div>
+		              <input type="email" name="signup_email" class="form-control" placeholder="Enter Email" required>
+		            </div>
+		        </div>
+		        <div class="row pt-3 mx-auto">
+	        		<div class="col-6 mx-auto form-group input-group">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text"><i class="fa fa-fingerprint"></i></span>
+		              </div>
+		              <input type="text" name="signup_uid" class="form-control" placeholder="Enter R UID" required>
+		            </div>
+	        		<div class="col-6 mx-auto form-group input-group">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text"><i class="fab fa-servicestack"></i></span>
+		              </div>
+		              <input type="text" name="signup_snumber" class="form-control" placeholder="Service Number" required>
+		            </div>
+		        </div>
+		        <div class="row pt-3 mx-auto">
+	        		<div class="col-6 mx-auto form-group input-group">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+		              </div>
+		              <input type="number" name="signup_pnumber" class="form-control" placeholder="Enter Phone Number" required>
+		            </div>
+	        		<div class="col-6 mx-auto form-group input-group">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text"><i class="fa fa-key"></i></span>
+		              </div>
+		              <input type="password" name="signup_password" class="form-control" placeholder="Enter New Password" required>
+		            </div>
+		        </div>
+		        <div class="row pt-3 mx-auto">
+	        		<div class="col-6 mx-auto form-group input-group">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+		              </div>
+		              <input type="date" name="signup_dob" class="form-control" placeholder="Enter DOB" required>
+		            </div>
+	        		<div class="col-6 mx-auto form-group input-group">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text"><i class="fa fa-mars-double"></i></span>
+		              </div>
+		              <select class="form-control" name="signup_gender">
+		              	<option>Select Gender</option>
+		              	<option>Male</option>
+		              	<option>Female</option>
+		              </select>
+		            </div>
+		        </div>	
+	            
+	            <center><button type="submit" class="btn btn-primary text-center my-2">Signup <i class="far fa-paper-plane"></i></button></center>
+	            <div class="text-center text-white">Already Registered ? <a href="#" onclick="change();">Login Here</a> </div><br>
+        	</form>
+        </div>
+    -->
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+	$('#signup-box').hide();
+
+	function change(){
+        $('#login-box').toggle();
+        $('#signup-box').toggle();
+    }
+</script>

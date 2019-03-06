@@ -1,0 +1,42 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <div class="container bg-dark text-white" >
+
+        <div class="container row rounded">
+            <div class="col-lg-5 mt-5 ">
+                <div class="col-7 mx-auto"><img src="{{ user.profile.picture.url}}"  class="img-fluid" width="350"></div>
+            </div>
+            <div class="col-lg-7 mt-5">
+                <div class="col-lg-10 mx-auto">
+                    <table class="table table-sm table-borderless table-hover ">
+                        <tr><td>Name :</td><td>{{user.profile.name}}</td></tr>
+                        <tr><td>Gender :</td><td>{{user.profile.sex}}</td></tr>
+                        <tr><td>Email :</td><td>{{user.email}}</td></tr>
+                        <tr><td>Registered UID :</td><td>{{user.username}}</td></tr>
+                        <tr><td>Service Number :</td><td>{{user.profile.service_number}}</td></tr>
+                        <tr><td>Phone Number :</td><td>{{user.profile.phone_number}}</td></tr>
+                        <tr><td>Date Of Birth :</td><td>{{user.profile.birth_date}}</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container row mx-auto">
+            <div class="col-12 mt-5 border rounded">
+                <h3 class="text-center d-block my-3">About User</h3>
+            </div>
+            <div class="col-12 mt-2 text-justify border rounded">
+                <h3 class="ml-1 d-block my-3">Heading 1</h3>
+                <P class="container">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</P>
+            </div>
+            <div class="col-12 mt-2 text-justify border rounded">
+                <h3 class="ml-1 d-block my-3">Heading 2</h3>
+                <P class="container">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</P>
+            </div>
+        </div>
+
+    </div>
+    {% endblock %}
+</body>
+
+</html>

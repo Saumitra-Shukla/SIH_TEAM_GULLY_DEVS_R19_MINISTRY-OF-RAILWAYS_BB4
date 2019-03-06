@@ -1,0 +1,81 @@
+
+<div id="tog" class="text-white" style="position: absolute;z-index: 10;">
+    <span class="btn btn-sm" data-toggle="offcanvas"><i class="fas fa-bars fa-2x"></i></span>
+</div>
+<div class="container mx-auto mb-4">
+    <h5 class="text-center">Search For Rates</h5>
+    <form class="form-inline" method="post" action="action-url">
+        <div class="col-lg-3 mt-3">
+            <select class="form-control-sm bg-dark text-white col-12 border-success" id="sel1">
+                <option>Select</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </div>
+        <div class="text-center" id="pp">
+            <input class="btn btn-sm btn-success  col-12 mt-3" type="submit" name="" value="Search News">
+        </div>
+        <script type="text/javascript">
+            if($(window).width()<596)
+                $('#pp').addClass('mx-auto');
+            console.log(5);
+        </script>
+    </form>
+</div>
+
+<!-- Table Section -->        
+<div class="">
+    <div class="newspapercategory-table">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Check out<strong> The Hindu</strong> Display  <strong>Ad Rates</strong></h2>
+                    <p class="green-bg-para text-center">Tariff Rates in Rupees per Sq.cm. (w.e.f 1-05-2018)</p>
+                    <div class="resp-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Edition</td>
+                                    <td>Base</td>
+                                    <td>Mon to Thus</td>
+                                    <td>Fri &amp; Sat</td>
+                                    <td>Sunday</td>
+                                    <td>Front Page</td>
+                                    <td>Page 3</td>
+                                    <td>Back Page</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Eastern Edition</td>
+                                    <td></td>
+                                    <td>220</td>
+                                    <td>240</td>
+                                    <td>230</td>
+                                    <td>60</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    $('table').addClass('table table-striped bg-white text-dark shadow border rounded bg-success ');
+    $('h2').addClass('text-center');
+    $('table thead tr td').addClass('text-white mt-1 bg-secondary');
+</script>
+
+<script type="text/javascript">
+    for(var i=0;i<20;i++)
+    $('tbody').append('<tr><td>Eastern Edition</td><td></td><td>220</td><td>240</td><td>230</td><td>60</td><td></td><td></td></tr>');
+</script>

@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+{% block content %}
+            <div class="container">
+                <div class="container">
+                    <h2 class="text-center font-weight-bold">Popular Live Running Trains</h2>
+                    <table class="table table-stripped mt-3 table-sm bg-white text-dark">
+                        <thead class="text-dark font-weight-bold pd-2">
+                            <td>Train</td>
+                            <td>Location</td>
+                            <td>Delay</td>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-info"><td></td><td></td><td></td></tr>
+                            <tr>
+                        {{data | safe}}
+                   </table>
+                   
+                    
+                </div>
+            </div>
+                <script type="text/javascript">
+                    $('table').find('a').contents().unwrap();
+                </script>
+ 
+
+
+<!-- 
+<script type="text/javascript">
+    $('table').addClass('table table-striped bg-white text-dark shadow border rounded bg-success ');
+    $('h2').addClass('text-center');
+    $('table thead tr td').addClass('text-white mt-1 bg-secondary');
+</script>
+
+<script type="text/javascript">
+    for(var i=0;i<20;i++)
+    $('tbody').append('<tr><td>Eastern Edition</td><td></td><td>220</td><td>240</td><td>230</td><td>60</td><td></td><td></td></tr>');
+</script>
+ -->
+{% endblock %}

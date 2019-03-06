@@ -1,0 +1,55 @@
+{% extends "main.html" %}
+
+                {% block content %}
+<div id="tog" class="text-white" style="position: absolute;z-index: 10;">
+    <span class="btn btn-sm" data-toggle="offcanvas"><i class="fas fa-bars fa-2x"></i></span>
+</div>
+<div class="container mx-auto mb-4">
+    <h5 class="text-center">Search For Newspaper</h5>
+    <form class="form-inline" method="post" action="action-url">
+        <div class="col-lg-3 mt-3">
+            <select class="form-control-sm bg-dark text-white col-12 border-success" id="sel1">
+                <option>Select</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </div>
+        <div class="text-center" id="pp">
+            <input class="btn btn-sm btn-success  col-12 mt-3" type="submit" name="" value="Search Newspaper">
+        </div>
+        <script type="text/javascript">
+            if($(window).width()<596)
+                $('#pp').addClass('mx-auto');
+            console.log(5);
+        </script>
+    </form>
+</div>
+
+                <div class="row rounded mx-auto container">
+                   	<div class="col-12 mt-5 jumbotron img-jumbo" >
+        				<br><br><br><br><br>
+        			</div>
+                </div>
+                <div class="container row mx-auto">
+                    <div class="col-12 my-2 border bg-white text-dark rounded">
+                        <h4 class="text-center d-block my-3">Latest News From "{{newspaper_detail.name}}"</h4>
+                    </div>
+                    {% for new in newspaper_detail.Newspaper.heading %}
+                    <div class="col-12 text-justify bg-white text-dark border rounded">
+                        <h4 class="ml-1 d-block my-3"{{new.heading}}</h4>
+                        <P class="container">{{new.heading}}</P>
+                        <a href="{% url 'newspapers:news_detail' pk=News.pk %}" class="d-inline-block mb-2 btn btn-outline-info float-right">Read More...</a>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="col-12 text-justify bg-white text-dark border rounded mt-1">
+                        <h4 class="ml-1 d-block my-3">News 2</h4>
+                        <P class="container">Short Description Of News. Lorem Ipsum is simply dummy text of the printing and typesetting industry......</P>
+                        <a href="{% url 'newspapers:news_detail' pk=News.pk %}}" class="d-inline-block mb-2 btn btn-outline-info float-right">Read More...</a>
+                    </div>
+                    <div class="col-12 text-justify bg-white text-dark border rounded mt-1">
+                        <h4 class="ml-1 d-block my-3">News 3</h4>
+                        <P class="container">Short Description Of News. Lorem Ipsum is simply dummy text of the printing and typesetting industry......</P>
+                        <a href="/url-of-news/" class="d-inline-block mb-2 btn btn-outline-info float-right">Read More...</a>
+                    </div> -->
+                </div> 
+            {% endblock %}

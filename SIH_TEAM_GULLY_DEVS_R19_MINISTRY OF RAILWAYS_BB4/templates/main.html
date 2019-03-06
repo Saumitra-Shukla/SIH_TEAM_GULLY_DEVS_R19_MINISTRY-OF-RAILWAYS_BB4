@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Bootsrap Practical</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/bootstrap4.min.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <script src="{% static 'lib/jquery-3.3.1.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="{% static 'lib/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style type="text/css">
+        .table-borderless td, .table-borderless th {
+            border: 0;
+        }
+    </style>
+</head>
+
+<body style="background-color: #6a963c;">
+
+    <!-- Header start -->
+    <nav class="navbar navbar-expand-sm navbar-dark navbar-top fixed-top bg-dark" style="box-shadow: 0px 5px 5px #252526;">
+        <div class="container">
+            <a href="http://www.indianrailways.gov.in/railwayboard/" class="navbar-brand">
+                <img src="{% static 'img/indian_railway.png' %}" class="rounded-circle img-fluid" width="50">
+            </a>
+            <!--<h2>MINISTRY OF RAILWAYS : PROJECT - MEDIA PLAN</h2> -->
+
+            <button class="navbar-toggler bg-success" data-toggle="collapse" data-target="#navid">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navid">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav text-center ml-auto" id="logged">
+                    <li class="nav-item dropdown mx-3">
+                        <a href="#" class="nav-link mt-2" data-toggle="dropdown">
+                            <i class="far fa-bell fa-2x"></i>
+                            <small><span class="badge badge-pill badge-warning notification text-warning">.</span></small>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="dropdown-item"> Notification 1 </a></li>
+                            <li><a href="#" class="dropdown-item"> Notification 2 </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3">
+                        <a href="{% url 'accounts:profile' %}" class="nav-link " data-toggle="dropdown">
+                          <img src="{{ user.profile.picture.url}}" class="rounded-circle img-fluid" width="50">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header"> </li>
+                            <li><a href="{% url 'accounts:profile' %}" class="dropdown-item">Profile </a></li>
+                           <li><a href="#" class="dropdown-item">Favourites </a></li>
+                            <li class="dropdown-header"> </li>
+                            <li><a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav text-center ml-auto" id="not-logged">
+                    <li class="nav-item m-2">
+                        <a href="{% url 'login' %}" class=" text-white btn btn-success">LogIn / SignUp</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <script type="text/javascript">
+        $('.navbar .dropdown').hover(function() {
+            $(this).find('.dropdown-menu').first().stop(true, true).delay(150).slideDown();
+        }, function() {
+            $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp()
+        });
+    </script>
+    <!--header end -->
+
+    <div class="container"><br><br><br><br></div>
+    <div class="container bg-dark text-white" style="min-height: 800px; border-radius: 7px 7px 0px 0px;box-shadow: 0px 5px 5px #252526;">
+        <div class="row-offcanvas row-offcanvas-left">
+
+            <!-- sidebar start --><br>
+            <div id="sidebar" class="sidebar-offcanvas text-white mt-1 bg-dark" style="border: 2px solid white; box-shadow: 5px 5px 5px #252526; height:750px;border-radius: 8px;">
+                <div class="mt-3">
+                    <div class="text-center my-2">
+                        <h5> Welcome </h5>
+                    </div>
+                    <hr class="bg-white">
+                    <div id="user" class="">
+                        <img class="img-responsive rounded-circle ml-4" src="{{ user.profile.picture.url}}" width="60">
+                        <small class="float-right mr-4">
+                        {{user.profile.name}} <br>
+                        {{user.profile.designation}}<br>
+                       {{user.profile.service_number}}<br>
+                        </small>
+                    </div>
+                    <hr class="bg-white">
+                    <div class="serach-box mx-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-dark border-gray" placeholder="Search...">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-dark btn border-gray"><i class="fa fa-search" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="bg-white">
+                    <div class="container custom-list">
+                        <ul class="list-unstyled" style="color: white;">
+                            <h6><span>General</span></h6>
+                            <div class="container">
+                                <a href="{% url 'accounts:profile' %}"><i class="fa fa-tachometer-alt"></i><span class=""> &nbsp;Dashboard</span></a>
+                                <a href="#">
+                                    <li data-toggle="collapse" data-target="#newspapers">
+                                        <i class="fas fa-newspaper"></i>
+                                        <span class="menu-text"> &nbsp;Newspaper</span>
+                                        <span class="badge badge-pill badge-danger">5</span>
+                                    </li>
+                                    <div class="collapse" id="newspapers">
+                                        <ul class="small">
+                                                {% for News in newspaper_name %}
+                                           <li><a href="{% url 'newspapers:newspaper_detail' pk=News.pk %}">{{News.name}}</a></li>
+                                               {% endfor %}
+                              <!--  <li><a href="/newspaper1-url/">Newspaper 1</a></li>
+                                <li><a href="/newspaper2-url/">Newspaper 2</a></li>
+                                <li><a href="/newspaper3-url/">Newspaper 3</a></li>
+                                <li><a href="/newspaper4-url/">Newspaper 4</a></li>
+                                <li><a href="/newspaper-other-url/">Other Newspapers</a></li> -->
+                                </ul>
+                                </div>
+                                </a>
+
+                                <li><a href="{% url 'rates:calc' %}"><i class="fas fa-calculator"></i><span class="menu-text"> &nbsp;Rate Estimeter </span></a></li>
+                                <!-- <li><a href="{% url 'rates:news_rates' %}"><i class="fas fa-rupee-sign"></i><span class="menu-text"> &nbsp;Tentative Rates </span></a></li> -->
+                                <li><a href="{% url 'newspapers:train_delay' %}"><i class="fas fa-subway"></i><span class="menu-text"> &nbsp;Train Delay </span></a></li>
+                                <a href="#">
+                                    <li data-toggle="collapse" data-target="#rates">
+                                        <i class="fas fa-rupee-sign"></i>
+                                        <span class="menu-text"> &nbsp;Tentative rates</span>
+                                        <!-- <span class="badge badge-pill badge-danger">5</span> -->
+                                    </li>
+                                    <div class="collapse" id="rates">
+                                        <ul class="small">
+
+                                           <li><a href="{% url 'rates:news_rates' %}">Rates by Newspaper</a></li>
+                                           <li><a href="{% url 'rates:city_rates' %}">Rates by Cities</a></li>
+
+                              <!--  <li><a href="/newspaper1-url/">Newspaper 1</a></li>
+                                <li><a href="/newspaper2-url/">Newspaper 2</a></li>
+                                <li><a href="/newspaper3-url/">Newspaper 3</a></li>
+                                <li><a href="/newspaper4-url/">Newspaper 4</a></li>
+                                <li><a href="/newspaper-other-url/">Other Newspapers</a></li> -->
+                                </ul>
+                                </div>
+                                </a>
+                                <li data-toggle="collapse" data-target="#Favourites">
+                                    <i class="fas fa-newspaper"></i>
+                                    <span class="menu-text"> &nbsp;News</span>
+                                    <span class="badge badge-pill badge-danger"></span>
+                                </li>
+                                <div class="collapse" id="Favourites">
+                                    <ul class="small">
+
+                                       <li><a href="{% url 'newspapers:vader_sentiment'  %}">Simantic Priority</a></li>
+                                        <li><a href="{% url 'newspapers:latest'  %}">Latest Priority</a></li>
+                          <!--  <li><a href="/newspaper1-url/">Newspaper 1</a></li>
+                            <li><a href="/newspaper2-url/">Newspaper 2</a></li>
+                            <li><a href="/newspaper3-url/">Newspaper 3</a></li>
+                            <li><a href="/newspaper4-url/">Newspaper 4</a></li>
+                            <li><a href="/newspaper-other-url/">Other Newspapers</a></li> -->
+                            </ul>
+                            </div>
+
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('[data-toggle=offcanvas]').click(function() {
+                        $('.row-offcanvas').toggleClass('active');
+                    });
+                });
+                $('#tog').hide();
+                $('#tog').show();
+            </script>
+            <!--sidebar end -->
+
+            <div id="main" class="">
+
+                {% block content %}
+                {% endblock %}
+                <!-- main content go here -->
+
+
+            </div>
+
+        </div><br><br>
+
+        <!-- Start footer -->
+        <footer id="mu-footer" class="mx-auto mt-2">
+                <div class="mu-footer-area">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mu-footer-right">
+                                <div class="mu-social-media">
+                                    <a href="https://www.facebook.com/RailMinIndia" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://twitter.com/RailMinIndia/" target="_blank"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://plus.google.com/+MinistryofRailwaysIndia" target="_blank"><i class="fab fa-google-plus-g"></i></a>
+                                    <a href="https://www.youtube.com/user/RailMinIndia" target="_blank"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <div class="mu-footer-left">
+                                <p class="mu-copy-right">&copy; Copyright <a href="#"> www.indianrailways.gov.in </a>All right reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </footer>
+        <!-- End footer -->
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+{% extends "main.html" %}
+
+                {% block content %}
+                <div id="tog" class="" style="position: absolute;z-index: 10;">
+                    <span class="btn btn-sm" data-toggle="offcanvas"><i class="fas fa-bars fa-2x"></i></span>
+                </div>
+                <div class="row rounded mx-auto container">
+                   	<div class="col-12 mt-5 jumbotron img-jumbo" >
+        				<br><br><br><br><br>
+        			</div>
+                </div>
+                <div class="container row mx-auto">
+                    <div class="col-12 my-2 border bg-white text-dark rounded">
+                        <h4 class="text-center d-block my-3">Latest News From {{newspaper_detail.name}}</h4>
+                    </div>
+                    {% for new in newspaper_detail.Newspaper.heading %}
+                    
+                    <div class="col-12 text-justify bg-white text-dark border rounded">
+                        <h4 class="ml-1 d-block my-3">{{new.heading}}</h4>
+                        <P class="container">{{new.heading}}
+                        <a href="{% url 'newspapers:news_detail' pk=News.pk %}}" class="d-inline-block mb-2 btn btn-outline-info float-right">Read More...</a>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="col-12 text-justify bg-white text-dark border rounded mt-1">
+                        <h4 class="ml-1 d-block my-3">News 2</h4>
+                        <P class="container">Short Description Of News. Lorem Ipsum is simply dummy text of the printing and typesetting industry......</P>
+                        <a href="/url-of-news/" class="d-inline-block mb-2 btn btn-outline-info float-right">Read More...</a>
+                    </div>
+                    <div class="col-12 text-justify bg-white text-dark border rounded mt-1">
+                        <h4 class="ml-1 d-block my-3">News 3</h4>
+                        <P class="container">Short Description Of News. Lorem Ipsum is simply dummy text of the printing and typesetting industry......</P>
+                        <a href="/url-of-news/" class="d-inline-block mb-2 btn btn-outline-info float-right">Read More...</a>
+                    </div> -->
+                </div>
+                {% endblock %}
+            
